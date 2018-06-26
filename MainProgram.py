@@ -16,7 +16,8 @@ def raw_data_generator():
     "akcelerometr_z":random.uniform(60.0,70.0),
     "barometr_t":random.uniform(20.0,30.0),
     "barometr_p":random.uniform(1000.0,1100.0),
-    "barometr_h":random.uniform(100.0,101.0)}
+    "barometr_h":random.uniform(100.0,101.0),
+    "enkoder_m": random.uniform(100.0, 101.0)}
     return raw_data
 
 # funkcja zbierająca odczyty do dalszych obliczeń
@@ -72,7 +73,17 @@ def data_viewer():
     return True
 
 def main(args):
-    print(data_averaging(data_sorter(data_collector(),"magnetometr_y")))
+    print("Wartości uśrednione dla 10 pomiarów: ")
+    print("średnia wartość mag_x: "+str(data_averaging(data_sorter(data_collector(),"magnetometr_x"))))
+    print("średnia wartość mag_y: "+str(data_averaging(data_sorter(data_collector(),"magnetometr_y"))))
+    print("średnia wartość mag_z: "+str(data_averaging(data_sorter(data_collector(),"magnetometr_z"))))
+    print("średnia wartość akc_x: "+str(data_averaging(data_sorter(data_collector(),"akcelerometr_x"))))
+    print("średnia wartość akc_y: "+str(data_averaging(data_sorter(data_collector(),"akcelerometr_y"))))
+    print("średnia wartość akc_z: "+str(data_averaging(data_sorter(data_collector(),"akcelerometr_z"))))
+    print("średnia wartość bar_t: "+str(data_averaging(data_sorter(data_collector(),"barometr_t"))))
+    print("średnia wartość bar_p: "+str(data_averaging(data_sorter(data_collector(),"barometr_p"))))
+    print("średnia wartość bar_h: "+str(data_averaging(data_sorter(data_collector(),"barometr_h"))))
+    print("średnia wartość enk_h: "+str(data_averaging(data_sorter(data_collector(),"enkoder_m"))))
     return 0
 
 if __name__ == '__main__':

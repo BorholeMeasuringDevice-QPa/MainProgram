@@ -20,12 +20,22 @@ def raw_data_generator():
     return raw_data
 
 # funkcja zbierająca odczyty do dalszych obliczeń
-
 def data_collector():
     Data_collection = [];
     for i in range(10):
         Data_collection.insert(i,raw_data_generator());
     return Data_collection
+
+# funkcja sortująca dane do dalszych obliczeń
+def data_sorter(Data_collection,key):
+    Sorted_data=[]
+    e = 0
+    while e < len(Data_collection):
+        Sorted_data.insert(e,Data_collection[e][key])
+        e += 1
+
+    return Sorted_data
+
 
 # funkcja odczytująca dane z Arduino
 def data_reader():
@@ -62,8 +72,7 @@ def data_viewer():
     return True
 
 def main(args):
-    for e in data_collector():
-        print(e)
+    print(data_averaging(data_sorter(data_collector(),"magnetometr_y")))
     return 0
 
 if __name__ == '__main__':

@@ -21,22 +21,22 @@ def data_averaging(data):
 # funkcja zbierająca wynik po uśrednieniu
 def data_final_result():
     Final_result={
-    "magnetometr_x":data_averaging(data_sorter(data_collector(),"magnetometr_x")),
-    "magnetometr_y":data_averaging(data_sorter(data_collector(),"magnetometr_y")),
-    "magnetometr_z":data_averaging(data_sorter(data_collector(),"magnetometr_z")),
-    "akcelerometr_x":data_averaging(data_sorter(data_collector(),"akcelerometr_x")),
-    "akcelerometr_y":data_averaging(data_sorter(data_collector(),"akcelerometr_y")),
-    "akcelerometr_z":data_averaging(data_sorter(data_collector(),"akcelerometr_z")),
-    "barometr_t":data_averaging(data_sorter(data_collector(),"barometr_t")),
-    "barometr_p":data_averaging(data_sorter(data_collector(),"barometr_p")),
-    "barometr_h":data_averaging(data_sorter(data_collector(),"barometr_h")),
-    "enkoder_m":data_averaging(data_sorter(data_collector(),"enkoder_m"))}
+    "magnetometr_x":data_averaging(data_sorter(data_collector(10),"magnetometr_x")),
+    "magnetometr_y":data_averaging(data_sorter(data_collector(10),"magnetometr_y")),
+    "magnetometr_z":data_averaging(data_sorter(data_collector(10),"magnetometr_z")),
+    "akcelerometr_x":data_averaging(data_sorter(data_collector(10),"akcelerometr_x")),
+    "akcelerometr_y":data_averaging(data_sorter(data_collector(10),"akcelerometr_y")),
+    "akcelerometr_z":data_averaging(data_sorter(data_collector(10),"akcelerometr_z")),
+    "barometr_t":data_averaging(data_sorter(data_collector(10),"barometr_t")),
+    "barometr_p":data_averaging(data_sorter(data_collector(10),"barometr_p")),
+    "barometr_h":data_averaging(data_sorter(data_collector(10),"barometr_h")),
+    "enkoder_m":data_averaging(data_sorter(data_collector(10),"enkoder_m"))}
     return Final_result
 
 # funkcja zbierająca odczyty do dalszych obliczeń
-def data_collector():
+def data_collector(amount):
     Data_collection = [];
-    for i in range(10):
+    for i in range(amount):
         Data_collection.insert(i,R.raw_data_generator());
     return Data_collection
 

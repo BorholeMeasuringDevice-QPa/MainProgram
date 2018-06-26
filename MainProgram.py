@@ -27,15 +27,22 @@ def save_to_file(data):
     return 0;
 
 #funkcja uśredniająca dane
-def data_averaging():
-    return True
+def data_averaging(data):
+    sum=0
+    for e in data:
+        sum+=e
+    average=round(sum/len(data),5)
+    return average
 
 #funckja wyświetlająca dane
 def data_viewer():
     return True
 
 def main(args):
+
+    data=[2.35,2.47,3.01,2.5,2.7,3.0,2.12]
     save_to_file("TESTOWY NAPIS")
+    print(data_averaging(data))
     return 0
 
 if __name__ == '__main__':

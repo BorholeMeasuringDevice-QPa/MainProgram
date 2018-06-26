@@ -46,18 +46,24 @@ def data_reader():
 def data_converter():
     return True
 
-#funkcja zapisująca odczyty do pliku
-def save_to_file(data):
+#funkcja tworząca nowy plik
+def create_a_file():
     date=datetime.datetime.now().strftime("%Y-%m-%d-%H-%M")
     file_name="file_"+date+".txt"
     file = open(file_name,"w+")
-    file.write("Zapis danych z: "+date+"\n\n")
-    i=0
-    while(i<20):
-        file.write(data+" nr "+str(i)+"\n")
-        i+=1
-    file.close()
-    print("Done")
+    file.write("Zapis z: "+date+"\n")
+    e=0
+    return file;
+
+#funkcja zapisująca dane do pliku
+def write_to_file(data,file):
+    e=0
+    Key_list = ["magnetometr_x", "magnetometr_y", "magnetometr_z", "akcelerometr_x", "akcelerometr_y",
+                "akcelerometr_z", "barometr_t", "barometr_p", "barometr_h", "enkoder_m"]
+    while e < len(data):
+        file.write(str(data[Key_list[e]]) + " | ")
+        e += 1
+    file.write("\n")
     return 0;
 
 #funkcja uśredniająca dane
@@ -68,23 +74,36 @@ def data_averaging(data):
     average=round(sum/len(data),5)
     return average
 
+# funkcja zbierająca wynik po uśrednieniu
+def data_final_result():
+    Final_result={
+    "magnetometr_x":data_averaging(data_sorter(data_collector(),"magnetometr_x")),
+    "magnetometr_y":data_averaging(data_sorter(data_collector(),"magnetometr_y")),
+    "magnetometr_z":data_averaging(data_sorter(data_collector(),"magnetometr_z")),
+    "akcelerometr_x":data_averaging(data_sorter(data_collector(),"akcelerometr_x")),
+    "akcelerometr_y":data_averaging(data_sorter(data_collector(),"akcelerometr_y")),
+    "akcelerometr_z":data_averaging(data_sorter(data_collector(),"akcelerometr_z")),
+    "barometr_t":data_averaging(data_sorter(data_collector(),"barometr_t")),
+    "barometr_p":data_averaging(data_sorter(data_collector(),"barometr_p")),
+    "barometr_h":data_averaging(data_sorter(data_collector(),"barometr_h")),
+    "enkoder_m":data_averaging(data_sorter(data_collector(),"enkoder_m"))}
+    return Final_result
+
 #funckja wyświetlająca dane
 def data_viewer():
     return True
 
 def main(args):
-    print("Wartości uśrednione dla 10 pomiarów: ")
-    print("średnia wartość mag_x: "+str(data_averaging(data_sorter(data_collector(),"magnetometr_x"))))
-    print("średnia wartość mag_y: "+str(data_averaging(data_sorter(data_collector(),"magnetometr_y"))))
-    print("średnia wartość mag_z: "+str(data_averaging(data_sorter(data_collector(),"magnetometr_z"))))
-    print("średnia wartość akc_x: "+str(data_averaging(data_sorter(data_collector(),"akcelerometr_x"))))
-    print("średnia wartość akc_y: "+str(data_averaging(data_sorter(data_collector(),"akcelerometr_y"))))
-    print("średnia wartość akc_z: "+str(data_averaging(data_sorter(data_collector(),"akcelerometr_z"))))
-    print("średnia wartość bar_t: "+str(data_averaging(data_sorter(data_collector(),"barometr_t"))))
-    print("średnia wartość bar_p: "+str(data_averaging(data_sorter(data_collector(),"barometr_p"))))
-    print("średnia wartość bar_h: "+str(data_averaging(data_sorter(data_collector(),"barometr_h"))))
-    print("średnia wartość enk_h: "+str(data_averaging(data_sorter(data_collector(),"enkoder_m"))))
-    return 0
+    #print("Wartości uśrednione dla 10 pomiarów: ")
+     file=create_a_file()
+     data1=data_final_result()
+     data2 = data_final_result()
+     data3 = data_final_result()
+     write_to_file(data1,file)
+     write_to_file(data2,file)
+     write_to_file(data3,file)
+    #print(data_final_result())
+     return 0
 
 if __name__ == '__main__':
     import sys

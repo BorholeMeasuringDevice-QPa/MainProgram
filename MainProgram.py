@@ -4,22 +4,12 @@
 
 import datetime
 import DataAdjustment as DA
-
-
+import DataReader as Read
 
 #funkcja czekająca na sygnał z enkodera
 def trigger():
     Trigger=False
     return Trigger
-
-
-
-
-
-
-# funkcja odczytująca dane z Arduino
-def data_reader():
-    return True
 
 # funckja formatująca dane na typy obsługiwane przez program
 def data_converter():
